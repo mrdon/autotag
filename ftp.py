@@ -45,6 +45,7 @@ def main():
     # optionally require SSL for both control and data channel
     handler.tls_control_required = True
     handler.tls_data_required = True
+    handler.passive_ports = (21000, 21010)
     server = FTPServer(('', 2021), handler)
     server.serve_forever()
 

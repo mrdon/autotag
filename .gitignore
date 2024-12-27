@@ -1,3 +1,7 @@
 public
 ftpd.key
-web/content/images
+web/content/images/*.JPG
+web/content/images/*.JPEG
+web/content/images/*.WAV
+
+

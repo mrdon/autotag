@@ -29,11 +29,10 @@ categories: [travel,tech,foo,bar,baz]
 class MyHandler(TLS_FTPHandler):
     def on_file_received(self, file):
         print("File received: %s" % file)
-        # if file.endswith(".JPG"):
-        #     print("Processing image: %s" % file)
-        #
-        #
-        # subprocess.run(["python3", "app.py", file])
+        if file.endswith(".JPG"):
+            print("Rebuilding site")
+            proc = subprocess.run(["hugo"], cwd="web")
+            print(f"Rebuild status: {proc.returncode}")
 
 
 def main():

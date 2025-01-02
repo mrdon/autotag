@@ -5,4 +5,5 @@ web/.hugo_build.lock
 !web/content/galleries/_index.md
 web/resources
 venv
+.env
 

@@ -1,29 +1,23 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import os
-import subprocess
-from datetime import datetime
 
 from pyftpdlib.servers import FTPServer
 from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import TLS_FTPHandler
+
+from autotag.ai import run_photo_agent
+from autotag.albums import create_album, regenerate_site
+from autotag.voice import transcribe
 
 
 class MyAuthorizer(DummyAuthorizer):
 
     def get_home_dir(self, username):
         base_dir = super().get_home_dir(username)
-        now = datetime.now().strftime('%Y-%m-%d')
-        album_dir = os.path.join(base_dir, now)
-        if not os.path.isdir(album_dir):
-            os.makedirs(album_dir, exist_ok=True)
-            now_pretty = datetime.now().strftime('%b %d, %Y')
-            with open(os.path.join(album_dir, 'index.md'), 'w') as w:
-                w.write(f"""
-                ---
-title: {now_pretty}
-categories: [travel,tech,foo,bar,baz]
----\
-                """)
-        return album_dir
+        return create_album(base_dir)
 
 
 class MyHandler(TLS_FTPHandler):
@@ -31,11 +25,18 @@ class MyHandler(TLS_FTPHandler):
         print("File received: %s" % file)
         if file.endswith(".JPG"):
             print("Rebuilding site")
-            proc = subprocess.run(["hugo"], cwd="web")
-            print(f"Rebuild status: {proc.returncode}")
+            regenerate_site()
+        elif file.endswith(".WAV"):
+            print("Transcribing audio")
+            translation = transcribe(file)
+            print("Transcription: " + translation)
+            result = run_photo_agent(os.getenv("BASEURL"), file[:-4] + ".JPG", translation)
+            print("Result: " + result)
+            os.remove(file)
 
 
 def main():
+
     pw = os.getenv("USER_PASSWORD")
     assert pw
     authorizer = MyAuthorizer()

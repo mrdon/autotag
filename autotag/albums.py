@@ -19,10 +19,8 @@ def create_album(base_dir: str, name: str | None = None) -> str:
         os.makedirs(album_dir, exist_ok=True)
         with open(os.path.join(album_dir, 'index.md'), 'w') as w:
             w.write(f"""
-                    ---
-    title: {album_name}
-    categories: [travel,tech,foo,bar,baz]
-    ---\
+title: {album_name}
+categories: [travel,tech,foo,bar,baz]
                     """)
     return album_dir
 

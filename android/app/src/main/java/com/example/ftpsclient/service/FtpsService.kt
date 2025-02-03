@@ -1,6 +1,8 @@
 package com.example.ftpsclient.service
 
 import com.example.ftpsclient.data.FtpsServer
+import org.apache.commons.net.ProtocolCommandEvent
+import org.apache.commons.net.ProtocolCommandListener
 import org.apache.commons.net.ftp.FTP
 import org.apache.commons.net.ftp.FTPSClient
 import org.apache.commons.net.util.TrustManagerUtils
@@ -8,6 +10,7 @@ import java.io.FileDescriptor
 import java.io.FileInputStream
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
+
 
 class FtpsService() {
     private val ftpsClient: FTPSClient
@@ -17,6 +20,23 @@ class FtpsService() {
             init(null, arrayOf<TrustManager>(TrustManagerUtils.getAcceptAllTrustManager()), null)
         }
         this.ftpsClient = FTPSClient(false, sslContext)
+//        this.ftpsClient.addProtocolCommandListener (object :
+//            ProtocolCommandListener {
+//            override fun protocolCommandSent(protocolCommandEvent: ProtocolCommandEvent) {
+//                System.out.printf(
+//                    "[%s][%d] Command sent : [%s]-%s", Thread.currentThread().name,
+//                    System.currentTimeMillis(), protocolCommandEvent.command,
+//                    protocolCommandEvent.message
+//                )
+//            }
+//
+//            override fun protocolReplyReceived(protocolCommandEvent: ProtocolCommandEvent) {
+//                System.out.printf(
+//                    "[%s][%d] Reply received : %s", Thread.currentThread().name,
+//                    System.currentTimeMillis(), protocolCommandEvent.message
+//                )
+//            }
+//        })
     }
 
     fun connect(server: FtpsServer): Boolean {
@@ -26,6 +46,8 @@ class FtpsService() {
             println("logging in")
             ftpsClient.login(server.username, server.password)
             println("logged in")
+            ftpsClient.execPBSZ(0)
+            ftpsClient.execPROT("P")
             ftpsClient.enterLocalPassiveMode()
             ftpsClient.setFileType(FTP.BINARY_FILE_TYPE)
             ftpsClient.changeWorkingDirectory(server.directory)
@@ -40,7 +62,8 @@ class FtpsService() {
     fun uploadFile(fileName: String, fileDescriptor: FileDescriptor): Boolean {
         return try {
             val fileInputStream = FileInputStream(fileDescriptor)
-            ftpsClient.storeFile(fileName, fileInputStream)
+            println("Uploading file: $fileName, $fileDescriptor")
+            ftpsClient.storeFile("/$fileName", fileInputStream)
             fileInputStream.close()
             true
         } catch (e: Exception) {

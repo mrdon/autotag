@@ -4,6 +4,7 @@ web/content/galleries
 web/.hugo_build.lock
 !web/content/galleries/_index.md
 web/resources
+android/app/build
 venv
 .env
 

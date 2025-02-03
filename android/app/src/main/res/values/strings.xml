@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name -->
+    <string name="app_name">FTPS Client</string>
+
+    <!-- Main screen -->
+    <string name="add_server">Add Server</string>
+    <string name="edit_server">Edit Server</string>
+    <string name="delete_server">Delete Server</string>
+    <string name="delete_server_title">Delete Server</string>
+    <string name="delete_server_message">Are you sure you want to delete server \'%1$s\'?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Server configuration -->
+    <string name="test_connection">Test Connection</string>
+    <string name="save_server">Save Server</string>
+    <string name="update_server">Update Server</string>
+    <string name="server_name">Server Name</string>
+    <string name="hostname">Hostname</string>
+    <string name="port">Port</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="directory">Default Directory</string>
+    <string name="is_default">Default</string>
+
+    <!-- Connection test -->
+    <string name="connection_test">Connection Test</string>
+    <string name="connection_success">Connection successful!</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="testing_connection">Testing connection...</string>
+
+    <!-- Server operations -->
+    <string name="server_saved">Server saved successfully</string>
+    <string name="server_updated">Server updated successfully</string>
+    <string name="server_deleted">Server deleted successfully</string>
+    <string name="fill_required_fields">Please fill in all required fields</string>
+
+    <!-- File upload -->
+    <string name="select_server">Select Server</string>
+    <string name="upload_success">Upload successful</string>
+    <string name="upload_failed">Upload failed</string>
+    <string name="uploading_file">Uploading file...</string>
+    <string name="select_server_for_upload">Select server for upload</string>
+
+    <!-- Error messages -->
+    <string name="error_invalid_port">Invalid port number</string>
+    <string name="error_connection_failed">Could not connect to server</string>
+    <string name="error_authentication_failed">Authentication failed</string>
+    <string name="error_file_upload">Failed to upload file</string>
+    <string name="error_server_not_found">Server not found</string>
+</resources>

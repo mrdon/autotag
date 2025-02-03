@@ -23,7 +23,7 @@ class MyAuthorizer(DummyAuthorizer):
 class MyHandler(TLS_FTPHandler):
     def on_file_received(self, file):
         print("File received: %s" % file)
-        if file.endswith(".JPG"):
+        if any(ext for ext in (".JPG", ".jpg", ".jpeg", ".png", ".PNG", ".webp") if file.endswith(ext)):
             print("Rebuilding site")
             regenerate_site()
         elif file.endswith(".WAV"):

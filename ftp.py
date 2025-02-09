@@ -21,8 +21,8 @@ class MyAuthorizer(DummyAuthorizer):
 
 
 class MyHandler(TLS_FTPHandler):
-    def on_file_received(self, file):
-        print("File received: %s" % file)
+    def on_file_received(self, file: str):
+        print(f"File received: {file} size: { os.path.getsize(file)}")
         if any(ext for ext in (".JPG", ".jpg", ".jpeg", ".png", ".PNG", ".webp") if file.endswith(ext)):
             print("Rebuilding site")
             regenerate_site()

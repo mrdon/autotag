@@ -50,8 +50,8 @@ class FtpsService() {
             ftpsClient.execPROT("P")
             ftpsClient.enterLocalPassiveMode()
             ftpsClient.setFileType(FTP.BINARY_FILE_TYPE)
+            ftpsClient.setFileTransferMode(FTP.STREAM_TRANSFER_MODE)
             ftpsClient.changeWorkingDirectory(server.directory)
-            println("Somehow it worked???")
             true
         } catch (e: Exception) {
             println("Unable to connect to server: $e")
@@ -63,8 +63,11 @@ class FtpsService() {
         return try {
             val fileInputStream = FileInputStream(fileDescriptor)
             println("Uploading file: $fileName, $fileDescriptor")
-            ftpsClient.storeFile("/$fileName", fileInputStream)
+            ftpsClient.enterLocalPassiveMode()
+            ftpsClient.setFileType(FTP.BINARY_FILE_TYPE)
+            val success = ftpsClient.storeFile("/$fileName", fileInputStream)
             fileInputStream.close()
+            println("File upload done - $success")
             true
         } catch (e: Exception) {
             println("Unable to upload file to server: $e")

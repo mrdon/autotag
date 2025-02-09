@@ -1,6 +1,7 @@
 package com.example.ftpsclient.ui
 
 import android.app.AlertDialog
+import android.app.ComponentCaller
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -169,7 +170,7 @@ class MainActivity : AppCompatActivity() {
             println("Sending $fileName")
             
             if (ftpsService.connect(server)) {
-                print("Connected")
+                println("Connected")
                 val success = try {
                     val inputPFD : ParcelFileDescriptor? = try {
                         contentResolver.openFileDescriptor(fileUri, "r")

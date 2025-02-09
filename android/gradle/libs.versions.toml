@@ -16,7 +16,7 @@ lifecycleLivedataKtx = "2.6.1"
 lifecycleViewmodelKtx = "2.6.1"
 roomCommon = "2.6.1"
 roomKtx = "2.6.1"
-commons-net = "3.9.0"
+commons-net = "3.11.1"
 ksp = "2.0.21-1.0.27"
 
 [libraries]

@@ -145,7 +145,7 @@ keep_orig = True
 # albums_sort_attr = 'name'
 
 # Reverse sort for albums
-# albums_sort_reverse = False
+albums_sort_reverse = True
 
 # Attribute of Media objects which is used to sort medias. 'date' can be used
 # to sort with EXIF dates, and 'meta.key' to sort on a metadata key (which then

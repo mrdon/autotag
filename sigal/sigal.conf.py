@@ -73,7 +73,7 @@ img_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.JPG']
 # - None: don't resize
 # img_processor = 'ResizeToFit'
 
-# Autorotate images
+# Autorotate images 
 # Warning: this setting is not compatible with `copy_exif_data` (see below),
 # because Sigal can't save the modified Orientation tag (currently Pillow can't
 # write EXIF).

@@ -49,7 +49,7 @@ python-slugify==8.0.4
 pytz==2025.1
 requests==2.32.3
 rsa==4.9
-sigal==2.4
+sigal==2.5
 six==1.17.0
 sniffio==1.3.1
 SpeechRecognition==3.12.0

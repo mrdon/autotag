@@ -1,4 +1,0 @@
----
-title: Photos
-linkTitle: Home
----

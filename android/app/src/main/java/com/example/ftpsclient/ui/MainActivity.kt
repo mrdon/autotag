@@ -1,7 +1,6 @@
 package com.example.ftpsclient.ui
 
 import android.app.AlertDialog
-import android.app.ComponentCaller
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -24,9 +23,14 @@ import com.example.ftpsclient.viewmodel.ServerViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.apache.commons.net.io.Util
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileNotFoundException
+import java.io.FileOutputStream
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: ServerViewModel
@@ -181,9 +185,27 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     if (inputPFD != null) {
+                        println("Size of file: ${inputPFD.statSize}")
                         val fd = inputPFD.fileDescriptor
-                        ftpsService.uploadFile(fileName, fd)
-                        inputPFD.close()
+//                        val bout = ByteArrayOutputStream()
+                        val fin = FileInputStream(fd)
+//                        Util.copyStream(fin, bout)
+//                        bout.close()
+
+
+
+                        try {
+//                            val bin =  ByteArrayInputStream(bout.toByteArray())
+//                            println("uploading in thread: ${bout.size()}")
+                            ftpsService.uploadFile(fileName, fin, inputPFD.statSize)
+                            ftpsService.disconnect()
+                        } catch (e: java.lang.Exception) {
+                            e.printStackTrace()
+                        } finally {
+                            inputPFD.close()
+                            fin.close()
+                        }
+
                         true
                     } else {
                         false
@@ -194,7 +216,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
 //                val success = ftpsService.uploadFile(filePath, fileName)
-                ftpsService.disconnect()
+
                 
                 withContext(Dispatchers.Main) {
                     Toast.makeText(
@@ -206,7 +228,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    
+
     private fun getRealPathFromURI(uri: Uri): String {
         val cursor = contentResolver.query(uri, null, null, null, null)
         cursor?.use {

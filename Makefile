@@ -8,3 +8,6 @@ help:
 
 build: ## Builds the website using sigal
 	cd sigal && venv/bin/sigal build ../web/content/galleries public
+
+run: build ## Runs the website using sigal
+	cd sigal && venv/bin/sigal serve public

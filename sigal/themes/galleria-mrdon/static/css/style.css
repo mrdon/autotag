@@ -130,6 +130,26 @@ header h1 a:hover, header h2 a:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+/* Pinch-to-zoom support */
+.galleria-stage {
+  touch-action: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.galleria-stage img {
+  touch-action: none;
+  pointer-events: auto;
+  will-change: transform;
+}
+
+/* Prevent default pinch-zoom on the entire gallery */
+#gallery {
+  touch-action: pan-x pan-y;
+}
+
 .icons {
   top: 10px;
   right: 20px;

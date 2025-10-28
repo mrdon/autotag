@@ -134,7 +134,7 @@ keep_orig = True
 # orig_dir = 'original'
 
 # Use symbolic links instead of copying the original images
-# orig_link = False
+orig_link = True
 
 # Use symbolic links that are relative to the source directory instead of
 # absolute paths
@@ -150,7 +150,7 @@ albums_sort_reverse = True
 # Attribute of Media objects which is used to sort medias. 'date' can be used
 # to sort with EXIF dates, and 'meta.key' to sort on a metadata key (which then
 # must exist for all images).
-# medias_sort_attr = 'filename'
+medias_sort_attr = 'date'
 
 # Reverse sort for medias
 # medias_sort_reverse = False

@@ -267,11 +267,15 @@ ignore_files = []
 # Plugins
 # --------
 
+# Custom plugin search paths
+plugin_paths = ['.']
+
 # List of plugins to use. The values must be a path than can be imported.
 # Another option is to import the plugin and put the module in the list, but
 # this will break with the multiprocessing feature (the settings dict obtained
 # from this file must be serializable).
-# plugins = [
+plugins = [
+    'plugins.gallery_json_manifest',  # Generate JSON manifests for live polling
 #     'sigal.plugins.adjust',
 #     'sigal.plugins.compress_assets',
 #     'sigal.plugins.copyright',
@@ -284,7 +288,7 @@ ignore_files = []
 #     'sigal.plugins.upload_s3',
 #     'sigal.plugins.watermark',
 #     'sigal.plugins.zip_gallery',
-# ]
+]
 
 # Adjust the image after resizing it. A default value of 1.0 leaves the images
 # untouched.

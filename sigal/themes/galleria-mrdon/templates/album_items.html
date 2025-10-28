@@ -23,6 +23,7 @@
     <script src="{{ theme.url }}/themes/{{ settings.galleria_theme }}/galleria.{{ settings.galleria_theme }}.min.js"></script>
     <script src="{{ theme.url }}/plugins/history/galleria.history.min.js"></script>
     <script src="{{ theme.url }}/pinch-zoom.js"></script>
+    <script src="{{ theme.url }}/live-gallery-poll.js"></script>
     <script>
     var data = [
       {% for media in album.medias -%}
@@ -83,6 +84,11 @@
     Galleria.ready(function() {
         if (typeof initGalleriaPinchZoom === 'function') {
             initGalleriaPinchZoom(this);
+        }
+
+        // Initialize live polling for new images
+        if (typeof GalleryPoller !== 'undefined') {
+            GalleryPoller.start(this);
         }
     });
 

@@ -214,3 +214,59 @@ footer span:not(:last-child):after {
     text-align: right;
   }
 }
+
+/* Toast notification for new images */
+.gallery-toast {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(34, 34, 34, 0.95);
+  color: #eeeeee;
+  padding: 16px 24px;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  cursor: pointer;
+  transition: top 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  min-width: 300px;
+  justify-content: space-between;
+}
+
+.gallery-toast.show {
+  top: 0;
+}
+
+.gallery-toast:hover {
+  background-color: rgba(44, 44, 44, 0.95);
+}
+
+.gallery-toast span {
+  flex: 1;
+  text-align: center;
+}
+
+.gallery-toast .toast-close {
+  background: none;
+  border: none;
+  color: #999999;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.gallery-toast .toast-close:hover {
+  color: #eeeeee;
+}

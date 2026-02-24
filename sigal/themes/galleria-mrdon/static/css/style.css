@@ -160,6 +160,7 @@ header h1 a:hover, header h2 a:hover {
 }
 .icons a {
   cursor: pointer;
+  margin-left: 8px;
 }
 .icons img {
   opacity: .7;

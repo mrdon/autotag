@@ -1,5 +1,7 @@
 {% from 'description.html' import img_description %}
 <div class="icons">
+  <a id="download" download><img src="{{ theme.url }}/img/download.png"
+                          title="Download" alt="Download original" /></a>
   <a id="fullscreen"><img src="{{ theme.url }}/img/fullscreen.png"
                           title="Fullscreen" alt="Fullscreen (f)" /></a>
 </div>
@@ -68,6 +70,15 @@
         $('#fullscreen').click(function() {
           gallery.toggleFullscreen();
         });
+
+        // Update download link when image changes
+        function updateDownloadLink() {
+          var d = gallery.getData();
+          var url = d.big || d.image;
+          $('#download').attr('href', url);
+        }
+        updateDownloadLink();
+        this.bind('image', updateDownloadLink);
 
         $('.icons').appendTo(this.$('container'));
     });

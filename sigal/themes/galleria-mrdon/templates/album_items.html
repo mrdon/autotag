@@ -72,13 +72,12 @@
         });
 
         // Update download link when image changes
-        function updateDownloadLink() {
+        this.bind('image', function() {
           var d = gallery.getData();
-          var url = d.big || d.image;
-          $('#download').attr('href', url);
-        }
-        updateDownloadLink();
-        this.bind('image', updateDownloadLink);
+          if (d) {
+            $('#download').attr('href', d.big || d.image);
+          }
+        });
 
         $('.icons').appendTo(this.$('container'));
     });

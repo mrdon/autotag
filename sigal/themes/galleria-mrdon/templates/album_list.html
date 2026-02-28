@@ -12,12 +12,32 @@
 <div id="albums">
   <ul>
     {% for alb in album.albums %}
-    <li><a href="{{ alb.url }}">
-      <img src="{{ alb.thumbnail }}" class="album_thumb" alt="{{ alb.name }}" title="{{ alb.name }}" /></a>
+    <li><a href="{{ alb.url }}" data-album="{{ alb.url }}">
+      <img src="{{ alb.thumbnail }}" class="album_thumb" alt="{{ alb.name }}" title="{{ alb.name }}" />
+      <span class="album_count">{{ alb.medias | length }}</span></a>
       <span class="album_title">{{ alb.title }}</span>
     </li>
     {% endfor %}
   </ul>
 </div>
 {% include 'album_items.html' %}
+{% endblock %}
+
+{% block late_js %}
+<script>
+document.querySelectorAll('#albums a[data-album]').forEach(function(link) {
+  fetch(link.dataset.album + 'data.json')
+    .then(function(r) { return r.json(); })
+    .then(function(items) {
+      var latest = items.reduce(function(max, item) {
+        var d = new Date(item.date).getTime();
+        return d > max ? d : max;
+      }, 0);
+      if (Date.now() - latest < 10 * 60 * 1000) {
+        link.querySelector('.album_count').classList.add('album_count--new');
+      }
+    })
+    .catch(function() {});
+});
+</script>
 {% endblock %}

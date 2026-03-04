@@ -1,7 +1,7 @@
 {% from 'description.html' import img_description %}
 <div class="icons">
-  <a id="download" download><img src="{{ theme.url }}/img/download.png"
-                          title="Download" alt="Download original" /></a>
+  <a id="download" target="_blank"><img src="{{ theme.url }}/img/download.png"
+                          title="View original" alt="View original" /></a>
   <a id="fullscreen"><img src="{{ theme.url }}/img/fullscreen.png"
                           title="Fullscreen" alt="Fullscreen (f)" /></a>
 </div>
@@ -33,8 +33,11 @@
         title: "{{ media.title }}",
         description: "{{ img_description(media) | e }}",
         thumb: "{{ media.thumbnail }}",
+        {% if media.type == "image" %}
+        big: "big/{{ media.dst_filename | urlencode }}",
+        {% endif %}
         {% if media.big %}
-        big: "{{ media.big_url }}",
+        orig: "{{ media.big_url }}",
         {% endif %}
         {% if media.type == "image" %}
         image: "{{ media.url }}"
@@ -75,7 +78,7 @@
         this.bind('image', function() {
           var d = gallery.getData();
           if (d) {
-            $('#download').attr('href', d.big || d.image);
+            $('#download').attr('href', d.orig || d.big || d.image);
           }
         });
 

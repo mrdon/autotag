@@ -275,6 +275,7 @@ plugin_paths = ['.']
 # this will break with the multiprocessing feature (the settings dict obtained
 # from this file must be serializable).
 plugins = [
+    'plugins.generate_big',           # Generate intermediate "big" images for mobile
     'plugins.gallery_json_manifest',  # Generate JSON manifests for live polling
 #     'sigal.plugins.adjust',
 #     'sigal.plugins.compress_assets',

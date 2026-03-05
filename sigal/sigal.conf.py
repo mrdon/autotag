@@ -134,7 +134,7 @@ keep_orig = True
 # orig_dir = 'original'
 
 # Use symbolic links instead of copying the original images
-orig_link = True
+orig_link = False
 
 # Use symbolic links that are relative to the source directory instead of
 # absolute paths

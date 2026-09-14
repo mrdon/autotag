@@ -53,7 +53,9 @@ def create_album(base_dir: str, name: str | None = None) -> str:
         if todays:
             latest_dir, latest_suffix = todays[-1]
             newest_mtime = _newest_file_mtime(latest_dir)
-            if newest_mtime is not None and (time.time() - newest_mtime) < GAP_SECONDS:
+            # An album with no photos yet (mtime None) is freshly created by a
+            # login that hasn't uploaded anything — reuse it, don't orphan it.
+            if newest_mtime is None or (time.time() - newest_mtime) < GAP_SECONDS:
                 return latest_dir
             # Need a new album — pick next suffix
             next_suffix = latest_suffix + 1

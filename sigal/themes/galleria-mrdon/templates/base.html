@@ -29,6 +29,11 @@
         <h1>{{ album.title }}</h1>
         {% include 'links.html' %}
       </header>
+      {% else %}
+      <header>
+        <h1><a href="{{ album.index_url }}">mrdonbrown.com</a></h1>
+        {% include 'links.html' %}
+      </header>
       {% endif %}
 
       <div id="main" role="main">

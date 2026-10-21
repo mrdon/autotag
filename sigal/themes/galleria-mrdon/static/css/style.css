@@ -57,6 +57,10 @@ header h1 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+header h1 a, header h1 a:link, header h1 a:visited {
+  color: #eeeeee;
+  text-decoration: none;
+}
 header a.back, header a.back:link, header a.back:visited {
   color: #cccccc;
   text-decoration: none;

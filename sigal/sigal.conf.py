@@ -277,6 +277,7 @@ plugin_paths = ['.']
 plugins = [
     'plugins.generate_big',           # Generate intermediate "big" images for mobile
     'plugins.gallery_json_manifest',  # Generate JSON manifests for live polling
+    'plugins.rated_thumbnail',        # Album thumbnail from 2/1-star camera ratings
 #     'sigal.plugins.adjust',
 #     'sigal.plugins.compress_assets',
 #     'sigal.plugins.copyright',

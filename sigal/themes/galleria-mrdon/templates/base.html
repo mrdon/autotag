@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>{{ album.title|striptags }} - {{ settings.title }}</title>
+    <title>{% if album.breadcrumb %}{{ album.title|striptags }} - {% endif %}{{ settings.title }}</title>
     <meta name="description" content="">
     <meta name="author" content="{{ album.author }}">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{{ theme.url }}/css/normalize.css">
     <link rel="stylesheet" href="{{ theme.url }}/themes/{{ settings.galleria_theme }}/galleria.{{ settings.galleria_theme }}.css">
@@ -23,15 +23,13 @@
     {% include 'decrypt.html' %}
     {% include 'gtm.html' %}
     <div class="container">
+      {% if album.breadcrumb %}
       <header>
-        <h1><a href="{{ album.index_url }}">{{ index_title }}</a></h1>
-
+        <a class="back" href="{{ album.index_url }}" title="All albums">&lsaquo; Albums</a>
+        <h1>{{ album.title }}</h1>
         {% include 'links.html' %}
-        {% include 'breadcrumb.html' %}
-        {% if album.breadcrumb %}
-        <hr>
-        {% endif %}
       </header>
+      {% endif %}
 
       <div id="main" role="main">
         {% block content %}{% endblock content %}

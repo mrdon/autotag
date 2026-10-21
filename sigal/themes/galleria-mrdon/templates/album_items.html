@@ -1,10 +1,12 @@
 {% from 'description.html' import img_description %}
+{% if album.medias %}
 <div class="icons">
   <a id="download" target="_blank"><img src="{{ theme.url }}/img/download.png"
                           title="View original" alt="View original" /></a>
   <a id="fullscreen"><img src="{{ theme.url }}/img/fullscreen.png"
                           title="Fullscreen" alt="Fullscreen (f)" /></a>
 </div>
+{% endif %}
 {% include 'map.html' %}
 {% if album.medias %}
 <div id="gallery"></div>
@@ -84,6 +86,11 @@
 
         $('.icons').appendTo(this.$('container'));
     });
+
+    // The 800x600 image looks soft on large screens, so show the 1920 "big" tier there
+    if (window.innerWidth * (window.devicePixelRatio || 1) > 1200) {
+      data.forEach(function(d) { if (d.big) { d.image = d.big; } });
+    }
 
     Galleria.configure({
         {% if settings.autoplay %}autoplay: true,{% endif %}
